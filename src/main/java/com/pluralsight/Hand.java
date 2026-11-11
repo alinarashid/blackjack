@@ -30,4 +30,15 @@ public class Hand {
         }
         return value;
     }
+
+    // Shows every card in the hand, like "K of Hearts, 5 of Spades"
+    public String displayHand() {
+        String result = "";
+        for (Card card : cards) {
+            card.flip();                                          // Turn it face up
+            result += card.getValue() + " of " + card.getSuit() + ", ";
+            card.flip();                                          // Hide it again
+        }
+        return result;
+    }
 }
