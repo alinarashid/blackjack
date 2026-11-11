@@ -23,12 +23,30 @@ public class BlackjackApp {
             player2.getHand().deal(deck.deal());
         }
 
-        // 4. Show each player's hand value
+        // 4. Show each player's cards and score
         int score1 = player1.getHand().getValue();
         int score2 = player2.getHand().getValue();
 
         System.out.println(player1.getName() + ": " + player1.getHand().displayHand() + "→ " + score1);
         System.out.println(player2.getName() + ": " + player2.getHand().displayHand() + "→ " + score2);
-        // 5. Pick the winner → Part B
+
+        // 5. Pick the winner (closest to 21 without going over)
+        boolean bust1 = score1 > 21;
+        boolean bust2 = score2 > 21;
+
+        if (bust1 && bust2) {
+            System.out.println("Both players bust! No winner.");
+        } else if (bust1) {
+            System.out.println(player2.getName() + " wins!");
+        } else if (bust2) {
+            System.out.println(player1.getName() + " wins!");
+        } else if (score1 > score2) {
+            System.out.println(player1.getName() + " wins!");
+        } else if (score2 > score1) {
+            System.out.println(player2.getName() + " wins!");
+        } else {
+            System.out.println("It's a tie!");
+        }
+
     }
 }
