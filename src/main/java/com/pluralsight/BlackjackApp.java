@@ -23,6 +23,37 @@ public class BlackjackApp {
             player2.getHand().deal(deck.deal());
         }
 
+        // 3.5 Each player takes a turn: hit or stay
+        Player[] players = {player1, player2};
+
+        for (Player player : players) {
+            System.out.println("\n--- " + player.getName() + "'s turn ---");
+
+            while (true) {
+                int score = player.getHand().getValue();
+                System.out.println(player.getName() + ": " + player.getHand().displayHand() + "→ " + score);
+
+                // Busted? The turn ends
+                if (score > 21) {
+                    System.out.println("💥 Bust!");
+                    break;
+                }
+
+                System.out.print("Hit or stay? (h/s): ");
+                String choice = scanner.nextLine();
+
+                if (choice.equalsIgnoreCase("h")) {
+                    // Give them one more card
+                    player.getHand().deal(deck.deal());
+                } else {
+                    System.out.println(player.getName() + " stays.");
+                    // End the turn
+                    break;
+                }
+            }
+        }
+
+        System.out.println("\n--- Final results ---");
         // 4. Show each player's cards and score
         int score1 = player1.getHand().getValue();
         int score2 = player2.getHand().getValue();
