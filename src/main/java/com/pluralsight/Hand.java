@@ -23,10 +23,22 @@ public class Hand {
     // then adds up all the values
     public int getValue() {
         int value = 0;
+        int aces = 0;
         for (Card card : cards) {
-            card.flip(); // Turn the card over to see the value
-            value += card.getPointValue();
-            card.flip(); // Hide the card again
+            // Turn the card over to see the value
+            card.flip();
+            int points = card.getPointValue();
+            value += points;
+            if (points == 11) {
+                aces++;
+            }
+            // Hide the card again
+            card.flip();
+        }
+        // Turn Aces from 11 into 1 while the hand is over 21
+        while(value > 21 && aces >0 ){
+            value-=10;
+            aces--;
         }
         return value;
     }
